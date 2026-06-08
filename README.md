@@ -9,6 +9,14 @@
 
 ---
 
+## 📸 Screenshots
+
+| Login | Sign Up |
+|-------|---------|
+| ![Login](frontend/screenshots/login.png) | ![Sign Up](frontend/screenshots/signup.png) |
+
+---
+
 ## ✨ Features
 
 - 💬 **Real-time messaging** — instant delivery via Socket.io
