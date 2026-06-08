@@ -1,48 +1,127 @@
-# Chatify — Real-Time Chat App
+# 💬 Chatify — Real-Time Chat App
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![WebSocket](https://img.shields.io/badge/WebSocket-010101?style=flat-square&logo=socket.io&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
-> A real-time chat application with rooms, live messaging, and presence indicators — built with Node.js and WebSockets from scratch (no Socket.io wrapper).
+> A full-stack real-time chat application with JWT auth, Socket.io messaging, image sharing via Cloudinary, email notifications via Resend, and rate limiting via Arcjet.
 
-## Features
+---
 
-- 💬 **Instant messaging** — messages delivered in < 50ms via WebSocket
-- 🏠 **Chat rooms** — create or join named rooms
-- 🟢 **Online presence** — see who is currently active in the room
-- 📜 **Message history** — recent messages loaded on join
-- 🔒 **Username-based identity** — no account needed, just pick a name
+## ✨ Features
 
-## Tech Stack
+- 💬 **Real-time messaging** — instant delivery via Socket.io
+- 🟢 **Online presence** — live online/offline status per user
+- 🖼️ **Image sharing** — upload and send images (Cloudinary)
+- 🔐 **JWT authentication** — HttpOnly cookie sessions with socket auth middleware
+- 📧 **Email notifications** — transactional emails via Resend
+- 🛡️ **Rate limiting & bot protection** — Arcjet security layer
+- 📜 **Message history** — MongoDB-persisted message store
 
-| Layer | Tech |
-|-------|------|
-| Backend | Node.js, `ws` library |
-| Frontend | Vanilla JS / React |
-| Protocol | Raw WebSocket (no Socket.io) |
-| Storage | In-memory message store |
+---
 
-## How It Works
+## 🗂️ Project Structure
 
 ```
-User A ──WS──► Server ──broadcast──► User B
-                  │
-              Room Manager
-              (tracks users per room)
+Chatify/
+├── backend/
+│   └── src/
+│       ├── server.js
+│       ├── controllers/
+│       │   ├── auth.controller.js
+│       │   └── message.controller.js
+│       ├── models/
+│       │   ├── User.js
+│       │   └── Message.js
+│       ├── routes/
+│       │   ├── auth.route.js
+│       │   └── message.route.js
+│       ├── middleware/
+│       │   └── socket.auth.middleware.js
+│       └── lib/
+│           ├── db.js           # MongoDB connect
+│           ├── socket.js       # Socket.io server
+│           ├── cloudinary.js   # Image upload
+│           ├── resend.js       # Email client
+│           ├── arcjet.js       # Rate limiting
+│           ├── env.js          # Env config
+│           └── utils.js
+└── frontend/
+    └── src/                    # React + Tailwind UI
 ```
 
-## Local Setup
+---
+
+## 🚀 Getting Started
+
+### Backend
 
 ```bash
-git clone https://github.com/jeetupal31/Chatify.git
-cd Chatify
+cd backend
+npm install
+cp .env.example .env  # fill in all values
+npm run dev
+```
+
+### Frontend
+
+```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000, pick a username, join a room.
+---
+
+## ⚙️ Environment Variables (`/backend/.env`)
+
+```env
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/chatify
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
+
+# Cloudinary (image uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Resend (email)
+RESEND_API_KEY=your_resend_api_key
+EMAIL_FROM=noreply@yourdomain.com
+EMAIL_FROM_NAME=Chatify
+
+# Arcjet (rate limiting)
+ARCJET_KEY=your_arcjet_key
+ARCJET_ENV=development
+```
 
 ---
 
-Made by [Jeetu Pal](https://github.com/jeetupal31)
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React, TailwindCSS |
+| Backend | Node.js, Express.js |
+| Real-time | Socket.io |
+| Database | MongoDB + Mongoose |
+| Auth | JWT + HttpOnly cookies |
+| Images | Cloudinary |
+| Email | Resend |
+| Security | Arcjet |
+
+---
+
+## 👨‍💻 Author
+
+**Jeetu Pal**
+[![GitHub](https://img.shields.io/badge/GitHub-jeetupal31-181717?style=flat&logo=github)](https://github.com/jeetupal31)
+
+---
+
+## 📄 License
+
+MIT
